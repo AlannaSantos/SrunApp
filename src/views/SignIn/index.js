@@ -17,8 +17,10 @@ export default function SignIn(){
     const handleLogin = async () => {
         if(emailField != '' && passwordField != ''){
             let result = await signIn(emailField, passwordField);
+            console.log(result);
             if(result.token){
-                await AsyncStorageLib.setItem('token', result.token);
+                await AsyncStorageLib.setItem('@Srun:user', JSON.stringify(result));
+                await AsyncStorageLib.setItem('@Srun:token', result.token);
 
                 /*userDispatch({
                     type: 'setAvatar',

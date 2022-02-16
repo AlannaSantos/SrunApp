@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 import { signUp } from '../../config/Api'
-import UserContext from '../../context/UserContext';
+//import UserContext from '../../context/UserContext';
 
 export default function SignUp(){
-    const { dispatch: userDispatch } = React.useContext(UserContext);
+    //const { setUserData } = React.useContext(UserContext);
     const navigation = useNavigation();
 
     const [firstname, setFirstname] = React.useState('');
@@ -23,8 +23,10 @@ export default function SignUp(){
             }else{
                 let result = await signUp(firstname, lastname, emailField, passwordField);
                 if(result.token){
-                    await AsyncStorageLib.setItem('token', result.token);
-
+                    await AsyncStorageLib.setItem('@Srun:user', JSON.stringify(result));
+                    await AsyncStorageLib.setItem('@Srun:token', result.token);
+                    
+                    //setUserData(result);
                     /*userDispatch({
                         type: 'setAvatar',
                         payload:{
@@ -33,7 +35,7 @@ export default function SignUp(){
                     });*/
 
                     navigation.reset({
-                        routes:[{ name: 'MainUserScreen'}]
+                        routes:[{ name: 'MainTab'}]
                     });
                 }else{
                     alert("E-mail e/ou senha inválidos!");
