@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
-import base64 from 'base-64'
+//import base64 from 'base-64'
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
-//import UserContext from '../../../context/UserContext'
+import Vieww from '../../../components/Vieww';
 
 export default function UserProfile(){
-    //const { userData } = React.useContext(UserContext);
+    
     const [image, setImage] = React.useState(null);
     const [userData, setUserData] = React.useState(null);
     const pickImage = async() => {
@@ -54,12 +54,15 @@ export default function UserProfile(){
         
         <View style={css.container}>
             <View style={header.view}>
-                <Text style={header.text}>PERFIL - { userData && userData.firstname }</Text>
+                <Text style={header.text}>PERFIL</Text>
             </View>
-            <TouchableOpacity onPress={pickImage}>
-                <Text>Pick an Image</Text>
-            </TouchableOpacity>
-            {image && <Image source={{ uri: `data:image/jpg;base64,${image.base64}` }} style={{ width: 100, height: 100, borderRadius: 50 }} /> }
+            <Vieww lbl="Nome" lblValue={userData && userData.firstname + " " + userData.lastname}/>
+            <Vieww lbl="Email" lblValue={userData && userData.email }/>
+            {/* <View style={css.view}>
+                <TouchableOpacity style={css.btnImage} onPress={pickImage}>
+                    {image && <Image source={{ uri: `data:image/jpg;base64,${image.base64}` }} style={{ width: 80, height: 80, borderRadius: 50 }} /> }
+                </TouchableOpacity>
+            </View> */}
         </View>
     )
 }
@@ -70,6 +73,27 @@ const css = StyleSheet.create({
         //justifyContent: 'center',
         alignItems: 'center'
     },
+    view:{
+        flex: 1,
+    },
+    //imgContainer: {
+        //padding: 2,
+        //flex: 1,
+        //flexDirection: 'row'
+        //alignItems: 'flex-start'
+        //left: 0
+        //flexDirection: 'row',
+        //alignItems: 'center'
+        //flex
+    //},
+    btnImage: {
+        marginTop: 5,
+        borderWidth: 1,
+        borderColor: '#FFF',
+        //padding: 10,
+        //backgroundColor: '#48bfe3',
+        width: 80, height: 80, borderRadius: 50 
+    }
 });
 
 const header = StyleSheet.create({
@@ -77,7 +101,7 @@ const header = StyleSheet.create({
         width: '100%',
         paddingTop: 12,
         paddingBottom: 12,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderColor: '#D3D3D3',
         alignItems: 'center'
     },
@@ -86,4 +110,4 @@ const header = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16
     }
-})
+});

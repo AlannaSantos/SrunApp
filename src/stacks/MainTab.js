@@ -4,6 +4,7 @@ import { FontAwesome5 , Octicons, FontAwesome } from '@expo/vector-icons'
 //import { StatusBar } from 'react-native';
 
 import UserProfile from '../views/TopBarNav/UserProfile/UserProfile';
+import ListActivitys from '../views/TopBarNav/ListActivitys/ListActivitys';
 import NewActivity from '../views/TopBarNav/NewActivity/NewActivity';
 import UserStatistics from '../views/TopBarNav/UserStatistics/UserStatistics';
 import UserConfig from '../views/TopBarNav/UserConfig/UserConfig';
@@ -11,9 +12,10 @@ import UserConfig from '../views/TopBarNav/UserConfig/UserConfig';
 const TopTabNav = createMaterialTopTabNavigator();
 export default function MainTab(){
     return (
-        <TopTabNav.Navigator 
+        <TopTabNav.Navigator
+            initialRouteName='NewActivity'
             screenOptions = {{
-                tabBarStyle: { backgroundColor: '#48bfe3', marginTop: 25 }, /*paddingTop: StatusBar.currentHeight*/
+                tabBarStyle: { backgroundColor: '#48bfe3', marginTop: 25 /*paddingTop: StatusBar.currentHeight*/ }, 
                 tabBarIndicatorStyle: { backgroundColor: '#FFF' },
             }}>
             <TopTabNav.Screen 
@@ -21,10 +23,15 @@ export default function MainTab(){
                 component={UserProfile}
                 options={{ title: (props) => <FontAwesome name='user-circle-o' size={24} color="#FFF" />}}
             />
+            <TopTabNav.Screen 
+                name='ListActivitys' 
+                component={ListActivitys}
+                options={{ title: (props) => <FontAwesome5  name='walking' size={25} color="#FFF" />}}
+            />
             <TopTabNav.Screen
                 name='NewActivity' 
                 component={NewActivity}
-                options={{ title: (props) => <FontAwesome5 name='walking' size={25} color="#FFF" />}}
+                options={{ title: (props) => <FontAwesome5 name="map-marked-alt" size={25} color="#FFF" />}}
             />
             <TopTabNav.Screen 
                 name='UserStatistics' 

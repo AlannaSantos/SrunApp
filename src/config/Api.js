@@ -1,4 +1,4 @@
-const BASE_URL_API = 'http://192.168.0.105:8080';
+const BASE_URL_API = 'http://192.168.0.106:8080';
 //var headers = new Headers();
 
 /*export const checkToken = async(token) => {
