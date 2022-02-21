@@ -4,11 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 import { signIn } from '../../config/Api'
-//import UserContext from '../../context/UserContext';
+import { GlobalAppContext } from '../../context/GlobalAppContext'
 import Input from '../../components/Input';
 
 export default function SignIn(){
-    //const { dispatch: userDispatch } = React.useContext(UserContext);
+    const { setUserData } = React.useContext(GlobalAppContext);
     const navigation = useNavigation();
 
     const [emailField, setEmailField] = React.useState('');
@@ -17,11 +17,11 @@ export default function SignIn(){
     const handleLogin = async () => {
         if(emailField != '' && passwordField != ''){
             let result = await signIn(emailField, passwordField);
-            console.log(result);
             if(result.token){
                 await AsyncStorageLib.setItem('@Srun:user', JSON.stringify(result));
                 await AsyncStorageLib.setItem('@Srun:token', result.token);
 
+                setUserData(result);
                 /*userDispatch({
                     type: 'setAvatar',
                     payload:{
